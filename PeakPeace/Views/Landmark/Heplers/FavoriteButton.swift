@@ -15,13 +15,14 @@ struct FavoriteButton: View {
         Button(action: {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                 isSet.toggle()
+                UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
             }
             if isSet {
                 animationAmoint -= 0.15
             } else {
                 animationAmoint += 0.35
             }
-            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+            
         }, label: {
             ZStack {
                 Circle()
