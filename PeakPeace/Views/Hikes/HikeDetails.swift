@@ -8,11 +8,39 @@
 import SwiftUI
 
 struct HikeDetails: View {
+    var hike: Hike
+    @State var dataToShow = \Hike.Observations.elevation
+    
+    var button = [
+        ("Elevation", \Hike.Observations.elevation),
+        ("Heart rate", \Hike.Observations.heartRate),
+        ("Pace", \Hike.Observations.pace)
+    ]
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            HikeGraph(hike: hike, path: dataToShow)
+                .frame(height: 200)
+            
+            HStack(spacing: 25) {
+                ForEach(button, id: \.0) { value in
+                    Button {
+                        dataToShow = value.1
+                    } label: {
+                        Text(value.0)
+                            .font(.system(size: 15))
+                            .foregroundStyle(value.1 == dataToShow
+                                             ? .gray
+                                             : .accentColor)
+                            .animation(nil)
+                    }
+                }
+            }
+        }
     }
 }
 
 #Preview {
-    HikeDetails()
+    var vm = HikeViewModel().hikes[0]
+    return HikeDetails(hike: vm)
+        .environmentObject(HikeViewModel())
 }
