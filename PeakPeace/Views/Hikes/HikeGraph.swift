@@ -50,7 +50,7 @@ struct HikeGraph: View {
 }
 
 #Preview {
-    var hike = HikeViewModel().hikes[0]
+    let hike = HikeViewModel().hikes[0]
     return HikeGraph(hike: hike, path: \.elevation)
         .environmentObject(HikeViewModel())
 }
