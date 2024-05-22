@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct PeakPeaceApp: App {
+    let viewModel = LandmarkViewModel()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            PeakPeaceTabView()
+                .environmentObject(viewModel)
         }
     }
 }
