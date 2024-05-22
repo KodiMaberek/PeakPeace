@@ -31,7 +31,6 @@ struct HikeDetails: View {
                             .foregroundStyle(value.1 == dataToShow
                                              ? .gray
                                              : .accentColor)
-                            .animation(nil)
                     }
                 }
             }
@@ -40,7 +39,7 @@ struct HikeDetails: View {
 }
 
 #Preview {
-    var vm = HikeViewModel().hikes[0]
+    let vm = HikeViewModel().hikes[0]
     return HikeDetails(hike: vm)
         .environmentObject(HikeViewModel())
 }
