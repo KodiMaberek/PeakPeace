@@ -8,11 +8,35 @@
 import SwiftUI
 
 struct CategoryHome: View {
+    @EnvironmentObject var vm: LandmarkViewModel
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            List {
+                TabView {
+                    ForEach(vm.featured, id: \.self) { feature in
+                        feature.image
+                            .resizable()
+                            .scaledToFill()
+                            .frame(height: 200)
+                            .clipShape(.rect(cornerRadius: 8))
+                            .clipped()
+                    }
+                }
+                .frame(height: 200)
+                .tabViewStyle(PageTabViewStyle())
+                
+                
+                ForEach(vm.category.keys.sorted(), id: \.self) { name in
+                    CategoryRow(categoryName: name, items: vm.category[name]!)
+                }
+            }
+            .listStyle(.inset)
+            .navigationTitle("Featured")
+        }
     }
 }
 
 #Preview {
     CategoryHome()
+        .environmentObject(LandmarkViewModel())
 }
