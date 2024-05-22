@@ -47,7 +47,7 @@ struct HikeView: View {
 }
 
 #Preview {
-    var vm = HikeViewModel().hikes[0]
+    let vm = HikeViewModel().hikes[0]
     return HikeView(hike: vm)
         .environmentObject(HikeViewModel())
 }
