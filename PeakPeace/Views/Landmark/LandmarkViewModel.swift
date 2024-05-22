@@ -19,6 +19,17 @@ final class LandmarkViewModel: ObservableObject {
         }
     }
     
+    var category: [String : [Landmark]] {
+        Dictionary(
+            grouping: landmarks,
+            by: {$0.category.rawValue}
+        )
+    }
+    
+    var featured: [Landmark] {
+        landmarks.filter { $0.isFeatured }
+    }
+    
     func saveData() {
         let encoded = try? JSONEncoder().encode(landmarks)
         modelData = encoded
