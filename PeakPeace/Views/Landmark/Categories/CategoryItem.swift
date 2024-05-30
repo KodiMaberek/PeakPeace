@@ -17,7 +17,7 @@ struct CategoryItem: View {
                 .clipShape(.rect(cornerRadius: 5))
             Text(landmark.name)
         }
-        .padding(.leading, 10)
+        .padding(.leading, 8)
     }
 }
 
