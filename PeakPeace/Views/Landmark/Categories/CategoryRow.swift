@@ -10,19 +10,20 @@ import SwiftUI
 struct CategoryRow: View {
     var categoryName: String
     var items: [Landmark]
+    
     var body: some View {
         VStack(alignment: .leading) {
-            Text(categoryName)
-                .font(.subheadline)
-                .padding(.leading, 10)
-                .padding(.top, 5)
+            NavigationLink(destination: CategoryList(categoryName: categoryName, landmark: items)) {
+                Text(categoryName)
+                    .font(.subheadline)
+                    .padding(.leading, 10)
+                    .padding(.top, 5)
+            }
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(alignment: .bottom, spacing: 2) {
                     ForEach(items) { item in
-                        NavigationLink {
-                            LandmarkDetail(landmark: item)
-                        } label: {
+                        NavigationLink(destination: LandmarkDetail(landmark: item)) {
                             CategoryItem(landmark: item)
                         }
                         .tint(.black)
@@ -38,4 +39,5 @@ struct CategoryRow: View {
     let vm = LandmarkViewModel()
     return CategoryRow(categoryName: vm.landmarks[0].category.rawValue,
                        items: Array(vm.landmarks.prefix(4)))
+    .environmentObject(vm)
 }
