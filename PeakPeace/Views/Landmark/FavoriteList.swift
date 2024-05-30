@@ -1,5 +1,5 @@
 //
-//  LandmarkList.swift
+//  FavoriteList.swift
 //  PeakPeace
 //
 //  Created by Rodion Akhmedov on 5/16/24.
@@ -23,7 +23,7 @@ struct FavoriteList: View {
                 }
             }
             .listStyle(.inset)
-            .navigationTitle("Landmarks")
+            .navigationTitle("Favorites")
             .animation(.easeIn, value: vm.filterLandmark)
         }
         .onAppear {
