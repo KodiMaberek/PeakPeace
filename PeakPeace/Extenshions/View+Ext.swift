@@ -6,3 +6,10 @@
 //
 
 import Foundation
+import SwiftUI
+
+extension View {
+    func hiddenTabBar(value: Bool) -> some View {
+        self.toolbar(value ? .visible : .hidden, for: .tabBar)
+    }
+}
