@@ -11,8 +11,9 @@ import SwiftUI
 final class LandmarkViewModel: ObservableObject {
     @AppStorage("landmarks") var modelData: Data?
     @Published var landmarks: [Landmark] = loadData("landmarkData.json")
-    @Published var showingFavorite = false
-    
+    @Published var showingFavorite = true
+    @Published var showingCategoryList = false
+    @Published var selectCategoryName: String? 
     var filterLandmark: [Landmark] {
         landmarks.filter { landmark in
             (!showingFavorite || landmark.isFavorite)
