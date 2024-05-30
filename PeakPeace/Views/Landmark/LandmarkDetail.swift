@@ -10,7 +10,8 @@ import MapKit
 
 struct LandmarkDetail: View {
     @EnvironmentObject var vm: LandmarkViewModel
-    
+    @EnvironmentObject var vmTab: TabViewViewModel
+ 
     var landmark: Landmark
     
     var indexLandmark: Int {
@@ -32,6 +33,7 @@ struct LandmarkDetail: View {
                         .font(.title)
                     FavoriteButton(isSet: $vm.landmarks[indexLandmark].isFavorite)
                 }
+                
                 HStack {
                     Text(landmark.park)
                     Spacer()
@@ -51,9 +53,16 @@ struct LandmarkDetail: View {
             .navigationTitle("\(landmark.name)")
             .navigationBarTitleDisplayMode(.inline)
         }
+        .hiddenTabBar(value: vmTab.showingTabBar)
         .onChange(of: vm.landmarks) { oldValue in
             vm.saveData()
         }
+        .onAppear(perform: {
+            vmTab.showingTabBar = false
+        })
+        .onDisappear(perform: {
+            vmTab.showingTabBar = true
+        })
     }
 }
 
@@ -61,4 +70,5 @@ struct LandmarkDetail: View {
     let landmarks: [Landmark] = loadData("landmarkData.json")
     return LandmarkDetail(landmark: landmarks[0])
         .environmentObject(LandmarkViewModel())
+        .environmentObject(TabViewViewModel())
 }
