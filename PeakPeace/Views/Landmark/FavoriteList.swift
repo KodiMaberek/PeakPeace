@@ -7,15 +7,13 @@
 
 import SwiftUI
 
-struct LandmarkList: View {
+struct FavoriteList: View {
     
     @EnvironmentObject var vm: LandmarkViewModel
     
     var body: some View {
         NavigationView {
             List {
-                Toggle("Favorites only", isOn: $vm.showingFavorite)
-                    .tint(.amber)
                 ForEach(vm.filterLandmark) { landmark in
                     NavigationLink {
                         LandmarkDetail(landmark: landmark)
@@ -35,6 +33,6 @@ struct LandmarkList: View {
 }
 
 #Preview {
-    LandmarkList()
+    FavoriteList()
         .environmentObject(LandmarkViewModel())
 }
